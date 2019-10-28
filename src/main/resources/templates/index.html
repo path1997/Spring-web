@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="row">
+<div class="col-sm-5 justify-content-center">
+<a href="/signup" class="btn btn-primary mb-3 mt-5">Dodaj pojazd</a>
+<table class="table table-striped table-dark">
+    <thead>
+    <tr>
+        <th> Marka </th>
+        <th> Model </th>
+        <th> Kolor </th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--<tr th:if="${cars.empty}">
+        <td colspan="2"> No Books Available </td>
+    </tr>-->
+    <tr th:each="car: ${cars}">
+        <td><span th:text="${car.mark}"> Title </span></td>
+        <td><span th:text="${car.model}"> Title </span></td>
+        <td><span th:text="${car.color}"> Title </span></td>
+        <td><a th:href="@{/edit/{id}(id=${car.id})}" class="btn btn-primary">Edytuj</a></td>
+        <td><a th:href="@{/delete/{id}(id=${car.id})}" class="btn btn-primary">Usuń</a></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+<div class="col-sm-6 mr-5">
+    <a href="/registerUser" class="btn btn-primary mb-3 mt-5">Rejestracja</a>
+    <a href="/logUser" class="btn btn-primary mb-3 mt-5">Logowanie</a>
+        <table class="table table-striped table-dark">
+            <thead>
+            <tr>
+                <th> Imie </th>
+                <th> Nazwisko </th>
+                <th> Telefon </th>
+                <th> Email </th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--<tr th:if="${cars.empty}">
+                <td colspan="2"> No Books Available </td>
+            </tr>-->
+            <tr th:each="user: ${users}">
+                <td><span th:text="${user.fname}"> Title </span></td>
+                <td><span th:text="${user.sname}"> Title </span></td>
+                <td><span th:text="${user.phone}"> Title </span></td>
+                <td><span th:text="${user.email}"> Title </span></td>
+            </tr>
+            </tbody>
+        </table>
+</div>
+</div>
+</body>
+</html>

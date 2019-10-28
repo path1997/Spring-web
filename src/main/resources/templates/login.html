@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="col-md-5 ml-2">
+    <form action="#" th:action="@{/logfinal}" th:object="${user}" method="post">
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label for="imie" class="col-form-label">Imie</label>
+                <input type="text" th:field="*{fname}" class="form-control" id="imie" placeholder="Imie">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="nazwisko" class="col-form-label">Nazwisko</label>
+                <input type="text" th:field="*{sname}" class="form-control" id="nazwisko" placeholder="Nazwisko">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mt-5 col align-self-center">
+                <input type="submit" class="btn btn-primary" value="Dodaj samochód">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
