@@ -20,6 +20,32 @@ public class User {
     private String sname;
     private String phone;
     private String email;
+    private String admin;
+
+    public List<Car> getCar() {
+        return car;
+    }
+
+    public void setCar(List<Car> car) {
+        this.car = car;
+    }
+
+    public String getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
+    }
+
+    public User(List<Car> car, String fname, String sname, String phone, String email, String admin) {
+        this.car = car;
+        this.fname = fname;
+        this.sname = sname;
+        this.phone = phone;
+        this.email = email;
+        this.admin = admin;
+    }
 
     public User() {
     }

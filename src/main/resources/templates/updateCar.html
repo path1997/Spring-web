@@ -9,15 +9,15 @@
     <h2 class="mb-5">Edytuj</h2>
     <div class="row">
         <div class="col-md-6">
-            <form action="#" th:action="@{/update/{id}(id=${car.id})}" th:object="${car}" method="post">
+            <form action="#" th:action="@{/updatecar/{id}(id=${car.id})}" th:object="${car}" method="post">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="marka" class="col-form-label">Marka</label>
-                        <input type="text" th:field="*{mark}" class="form-control" id="marka" placeholder="Marka">
+                        <input type="text" th:field="*{mark}" class="form-control" id="marka" placeholder="Marka" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="model" class="col-form-label">Email</label>
-                        <input type="text" th:field="*{model}" class="form-control" id="model" placeholder="Model">
+                        <input type="text" th:field="*{model}" class="form-control" id="model" placeholder="Model" required>
                     </div>
                     <label for="kolor" class="col-form-label">Kolor</label>
                     <select class="form-control" id="kolor" th:field="*{color}">
@@ -26,6 +26,12 @@
                         <option th:value="Czarny">Czarny</option>
                         <option th:value="Niebieski">Niebieski</option>
                     </select>
+                    <div class="col-md-3">
+                        <label for="wypozyczalnia" class="col-form-label">Wypożyczalnia</label>
+                        <select class="form-control" id="wypozyczalnia" th:field="*{rental.id}">
+                            <option th:each="rental: ${rentals}" th:value="${rental.id}" th:text="${rental.city+' '+rental.address}"></option>
+                        </select>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mt-5">

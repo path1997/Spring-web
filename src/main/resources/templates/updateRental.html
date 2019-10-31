@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container my-5">
+    <h2 class="mb-5">Edytuj</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="#" th:action="@{/updaterental/{id}(id=${rental.id})}" th:object="${rental}" method="post">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label for="miasto" class="col-form-label">Miasto</label>
+                        <input type="text" th:field="*{city}" class="form-control" id="miasto" placeholder="Miasto" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="adres" class="col-form-label">Adres</label>
+                        <input type="text" th:field="*{address}" class="form-control" id="adres" placeholder="Adres" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="email" class="col-form-label">Email</label>
+                        <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="telefon" class="col-form-label">Telefon</label>
+                        <input type="text" th:field="*{phone}" class="form-control" id="telefon" placeholder="Telefon" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mt-5">
+                        <input type="submit" class="btn btn-primary" value="Zaktualizuj">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -14,6 +14,20 @@ public class Car {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "rental_id")
+    private Rental rental;
+
+    public Car(User user, Rental rental, String mark, boolean state, String photo, String model, Color color) {
+        this.user = user;
+        this.rental = rental;
+        this.mark = mark;
+        this.state = state;
+        this.photo = photo;
+        this.model = model;
+        this.color = color;
+    }
+
     public User getUser() {
         return user;
     }
@@ -29,7 +43,33 @@ public class Car {
         this.color = color;
     }
 
+    public Rental getRental() {
+        return rental;
+    }
+
+    public void setRental(Rental rental) {
+        this.rental = rental;
+    }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     private String mark;
+    private boolean state;
+    private String photo;
     //@Transient
     private String model;
     @Enumerated(EnumType.STRING)
