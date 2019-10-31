@@ -42,10 +42,10 @@ Witamy na stronie głównej wypożyczalni
             <th> Wynajmij </th>
         </tr>
         <tr th:each="carx: ${cars}">
-            <td th:if="${rental.id}==${carx.rental.id}"><span  th:text="${carx.mark}"> Title </span></td>
-            <td th:if="${rental.id}==${carx.rental.id}"><span  th:text="${carx.model}"> Title </span></td>
-            <td th:if="${rental.id}==${carx.rental.id}"><span  th:text="${carx.color}"> Title </span></td>
-            <td th:if="${rental.id}==${carx.rental.id}"><a th:href="@{/getcar/{id}/{idC}(id=${user.id},idC=${carx.id})}" class="btn btn-primary">Wynajmij</a></td>
+            <td th:if="${rental.id}==${carx.rental.id} and ${carx.state}==0"><span  th:text="${carx.mark}"> Title </span></td>
+            <td th:if="${rental.id}==${carx.rental.id} and ${carx.state}==0"><span  th:text="${carx.model}"> Title </span></td>
+            <td th:if="${rental.id}==${carx.rental.id} and ${carx.state}==0"><span  th:text="${carx.color}"> Title </span></td>
+            <td th:if="${rental.id}==${carx.rental.id} and ${carx.state}==0"><a th:href="@{/getcar/{id}/{idC}(id=${user.id},idC=${carx.id})}" class="btn btn-primary">Wynajmij</a></td>
 
         </tr>
     </table>

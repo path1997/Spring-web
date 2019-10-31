@@ -245,14 +245,28 @@ public class MainController {
         Car car2=carRepo.findById(idC).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
         System.out.println(car.getRental().getId());
         car2.setState(0);
-        /*Rental rental=new Rental();
+        Rental rental=new Rental();
         rental.setId(car.getRental().getId());
-        car2.setRental(rental);*/
+        car2.setRental(rental);
         carRepo.save(car2);
         model.addAttribute("user", user);
         model.addAttribute("cars", carRepo.findAll());
         model.addAttribute("rentals", rentalRepo.findAll());
+        return new RedirectView("/user/{id}");
+    }
 
+    @GetMapping("/getcar/{id}/{idC}")
+    public RedirectView showGetCar(@PathVariable("id") long id, @PathVariable("idC") long idC, Model model) {
+        System.out.println("elo");
+        User user = userRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
+        Car car = carRepo.findById(idC).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
+        car.setState(1);
+        car.setUser(user);
+        carRepo.save(car);
+
+        model.addAttribute("user", user);
+        model.addAttribute("cars", carRepo.findAll());
+        model.addAttribute("rentals", rentalRepo.findAll());
         return new RedirectView("/user/{id}");
     }
 
