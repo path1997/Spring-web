@@ -18,15 +18,15 @@ Witamy na stronie głównej wypożyczalni
             <th> Wynajmij </th>
         </tr>
         <tr th:each="carx: ${cars}">
-            <td th:if="${user.id}==${carx.user.id} and ${carx.state}==1"><span  th:text="${carx.mark}"> Title </span></td>
-            <td th:if="${user.id}==${carx.user.id} and ${carx.state}==1"><span  th:text="${carx.model}"> Title </span></td>
-            <td th:if="${user.id}==${carx.user.id} and ${carx.state}==1"><span  th:text="${carx.color}"> Title </span></td>
+            <td th:if="${carx.state}==1 and ${user.id}==${carx.user.id}"><span  th:text="${carx.mark}"> Title </span></td>
+            <td th:if="${carx.state}==1 and ${user.id}==${carx.user.id}"><span  th:text="${carx.model}"> Title </span></td>
+            <td th:if="${carx.state}==1 and ${user.id}==${carx.user.id}"><span  th:text="${carx.color}"> Title </span></td>
             <form action="#" th:action="@{/returncar/{id}/{idC}(id=${user.id},idC=${carx.id})}" th:object="${car}" method="post">
-                <td th:if="${user.id}==${carx.user.id} and ${carx.state}==1">
+                <td th:if="${carx.state}==1 and ${user.id}==${carx.user.id}">
                     <select class="form-control" id="wypozyczalnia" th:field="*{rental.id}">
                         <option th:each="rental: ${rentals}" th:value="${rental.id}" th:text="${rental.city+' '+rental.address}"></option>
                     </select></td>
-            <td th:if="${user.id}==${carx.user.id} and ${carx.state}==1"><input type="submit" class="btn btn-primary" value="Zaktualizuj"></td>
+                <td th:if="${carx.state}==1 and ${user.id}==${carx.user.id}"><input type="submit" class="btn btn-primary" value="Zaktualizuj"></td>
             </form>
         </tr>
     </table>

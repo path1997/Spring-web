@@ -159,7 +159,6 @@ public class MainController {
             /*System.out.println(uzyt.getFname());
             System.out.println(uzyt.getSname());*/
             if (uzyt.getFname().equals(imie) && uzyt.getSname().equals(nazwisko) && uzyt.getAdmin().equals("TAK")) {
-                System.out.println("zalogowano");
                 return new RedirectView("/admin");
             } else if (uzyt.getFname().equals(imie) && uzyt.getSname().equals(nazwisko)) {
                 return new RedirectView("/user/"+uzyt.getId());
@@ -243,7 +242,6 @@ public class MainController {
     public RedirectView showUserPanelRental(@PathVariable("id") long id, @PathVariable("idC") long idC, Car car, Model model) {
         User user = userRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
         Car car2=carRepo.findById(idC).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
-        System.out.println(car.getRental().getId());
         car2.setState(0);
         Rental rental=new Rental();
         rental.setId(car.getRental().getId());
@@ -257,7 +255,6 @@ public class MainController {
 
     @GetMapping("/getcar/{id}/{idC}")
     public RedirectView showGetCar(@PathVariable("id") long id, @PathVariable("idC") long idC, Model model) {
-        System.out.println("elo");
         User user = userRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
         Car car = carRepo.findById(idC).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
         car.setState(1);
