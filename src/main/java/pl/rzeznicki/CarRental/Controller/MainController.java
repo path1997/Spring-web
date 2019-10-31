@@ -1,4 +1,4 @@
-package pl.rzeznicki.springdataexample.Controller;
+package pl.rzeznicki.CarRental.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,13 +7,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
-import pl.rzeznicki.springdataexample.Entity.Car;
-import pl.rzeznicki.springdataexample.Entity.Rental;
-import pl.rzeznicki.springdataexample.Entity.User;
-import pl.rzeznicki.springdataexample.Repo.CarRepo;
-import pl.rzeznicki.springdataexample.Repo.RentalRepo;
-import pl.rzeznicki.springdataexample.Repo.UserRepo;
+import pl.rzeznicki.CarRental.Entity.Car;
+import pl.rzeznicki.CarRental.Entity.Rental;
+import pl.rzeznicki.CarRental.Entity.User;
+import pl.rzeznicki.CarRental.Repo.CarRepo;
+import pl.rzeznicki.CarRental.Repo.RentalRepo;
+import pl.rzeznicki.CarRental.Repo.UserRepo;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -147,6 +148,7 @@ public class MainController {
         return "login";
     }
     @PostMapping("/loginuser")
+    @ResponseBody
     public RedirectView logFinal(@Valid User user, Model model){
         String imie=user.getFname();
         /*System.out.println(imie);*/
@@ -159,8 +161,8 @@ public class MainController {
             if (uzyt.getFname().equals(imie) && uzyt.getSname().equals(nazwisko) && uzyt.getAdmin().equals("TAK")) {
                 System.out.println("zalogowano");
                 return new RedirectView("/admin");
-            } else if (uzyt.getFname().equals(imie) && uzyt.getSname().equals(nazwisko) && uzyt.getAdmin().equals("TAK")) {
-
+            } else if (uzyt.getFname().equals(imie) && uzyt.getSname().equals(nazwisko)) {
+                return new RedirectView("/user/"+uzyt.getId());
             }
         }
         System.out.println("nie zalogowano");
@@ -228,6 +230,30 @@ public class MainController {
         userRepo.save(user);
         model.addAttribute("users", rentalRepo.findAll());
         return new RedirectView("/admin");
+    }
+    @GetMapping("/user/{id}")
+    public String showUserPanel(@PathVariable("id") long id,Car car, Model model) {
+        User user = userRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
+        model.addAttribute("user", user);
+        model.addAttribute("cars", carRepo.findAll());
+        model.addAttribute("rentals", rentalRepo.findAll());
+        return "userPanel";
+    }
+    @PostMapping("/returncar/{id}/{idC}")
+    public RedirectView showUserPanelRental(@PathVariable("id") long id, @PathVariable("idC") long idC, Car car, Model model) {
+        User user = userRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
+        Car car2=carRepo.findById(idC).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
+        System.out.println(car.getRental().getId());
+        car2.setState(0);
+        /*Rental rental=new Rental();
+        rental.setId(car.getRental().getId());
+        car2.setRental(rental);*/
+        carRepo.save(car2);
+        model.addAttribute("user", user);
+        model.addAttribute("cars", carRepo.findAll());
+        model.addAttribute("rentals", rentalRepo.findAll());
+
+        return new RedirectView("/user/{id}");
     }
 
 }

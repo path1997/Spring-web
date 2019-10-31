@@ -1,6 +1,4 @@
-package pl.rzeznicki.springdataexample.Entity;
-
-import pl.rzeznicki.springdataexample.Color;
+package pl.rzeznicki.CarRental.Entity;
 
 import javax.persistence.*;
 import java.util.List;

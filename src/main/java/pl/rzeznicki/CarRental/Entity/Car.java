@@ -1,6 +1,6 @@
-package pl.rzeznicki.springdataexample.Entity;
+package pl.rzeznicki.CarRental.Entity;
 
-import pl.rzeznicki.springdataexample.Color;
+import pl.rzeznicki.CarRental.Color;
 
 import javax.persistence.*;
 
@@ -18,7 +18,7 @@ public class Car {
     @JoinColumn(name = "rental_id")
     private Rental rental;
 
-    public Car(User user, Rental rental, String mark, boolean state, String photo, String model, Color color) {
+    public Car(User user, Rental rental, String mark, int state, String photo, String model, Color color) {
         this.user = user;
         this.rental = rental;
         this.mark = mark;
@@ -51,11 +51,11 @@ public class Car {
         this.rental = rental;
     }
 
-    public boolean isState() {
+    public int getState() {
         return state;
     }
 
-    public void setState(boolean state) {
+    public void setState(int state) {
         this.state = state;
     }
 
@@ -68,7 +68,7 @@ public class Car {
     }
 
     private String mark;
-    private boolean state;
+    private int state;
     private String photo;
     //@Transient
     private String model;

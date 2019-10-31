@@ -1,4 +1,4 @@
-package pl.rzeznicki.springdataexample;
+package pl.rzeznicki.CarRental;
 
 public class TestM {
     private int id;

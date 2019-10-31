@@ -1,4 +1,4 @@
-package pl.rzeznicki.springdataexample;
+package pl.rzeznicki.CarRental;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

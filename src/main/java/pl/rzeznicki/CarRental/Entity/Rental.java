@@ -1,4 +1,4 @@
-package pl.rzeznicki.springdataexample.Entity;
+package pl.rzeznicki.CarRental.Entity;
 
 import javax.persistence.*;
 import java.util.List;

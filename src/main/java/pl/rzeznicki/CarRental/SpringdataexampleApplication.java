@@ -1,4 +1,4 @@
-package pl.rzeznicki.springdataexample;
+package pl.rzeznicki.CarRental;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

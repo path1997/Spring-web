@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+Witamy na stronie głównej wypożyczalni
+<a href="/">Wyloguj</a>
+<a href="/edituser/">Edytuj konto</a>
+<h2>Wpożyczone auta przez ciebie</h2>
+<div class="row">
+    <table class="table table-striped table-dark">
+        <tr>
+            <th> Marka </th>
+            <th> Model </th>
+            <th> Kolor </th>
+            <th> Wynajmij </th>
+        </tr>
+        <tr th:each="carx: ${cars}">
+            <td th:if="${user.id}==${carx.user.id} and ${carx.state}==1"><span  th:text="${carx.mark}"> Title </span></td>
+            <td th:if="${user.id}==${carx.user.id} and ${carx.state}==1"><span  th:text="${carx.model}"> Title </span></td>
+            <td th:if="${user.id}==${carx.user.id} and ${carx.state}==1"><span  th:text="${carx.color}"> Title </span></td>
+            <form action="#" th:action="@{/returncar/{id}/{idC}(id=${user.id},idC=${carx.id})}" th:object="${car}" method="post">
+                <td th:if="${user.id}==${carx.user.id} and ${carx.state}==1">
+                    <select class="form-control" id="wypozyczalnia" th:field="*{rental.id}">
+                        <option th:each="rental: ${rentals}" th:value="${rental.id}" th:text="${rental.city+' '+rental.address}"></option>
+                    </select></td>
+            <td th:if="${user.id}==${carx.user.id} and ${carx.state}==1"><input type="submit" class="btn btn-primary" value="Zaktualizuj"></td>
+            </form>
+        </tr>
+    </table>
+</div>
+    <h2>Wypożycz auto</h2>
+<div class="row">
+    <table th:each="rental: ${rentals}" class="table table-striped table-dark">
+        <tr>
+            <h3 th:text="${rental.city}+' '+${rental.address}"></h3>
+            <th> Marka </th>
+            <th> Model </th>
+            <th> Kolor </th>
+            <th> Wynajmij </th>
+        </tr>
+        <tr th:each="carx: ${cars}">
+            <td th:if="${rental.id}==${carx.rental.id}"><span  th:text="${carx.mark}"> Title </span></td>
+            <td th:if="${rental.id}==${carx.rental.id}"><span  th:text="${carx.model}"> Title </span></td>
+            <td th:if="${rental.id}==${carx.rental.id}"><span  th:text="${carx.color}"> Title </span></td>
+            <td th:if="${rental.id}==${carx.rental.id}"><a th:href="@{/getcar/{id}/{idC}(id=${user.id},idC=${carx.id})}" class="btn btn-primary">Wynajmij</a></td>
+
+        </tr>
+    </table>
+</div>
+</body>
+</html>
