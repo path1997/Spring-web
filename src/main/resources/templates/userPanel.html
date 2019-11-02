@@ -7,7 +7,7 @@
 <body>
 Witamy na stronie głównej wypożyczalni
 <a href="/">Wyloguj</a>
-<a href="/edituser/">Edytuj konto</a>
+<a th:href="@{/edituser/0/{id}(id=${user.id})}">Edytuj konto</a>
 <h2>Wpożyczone auta przez ciebie</h2>
 <div class="row">
     <table class="table table-striped table-dark">

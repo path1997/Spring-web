@@ -14,6 +14,7 @@
         <th> Marka </th>
         <th> Model </th>
         <th> Kolor </th>
+        <th> Wypozyczony </th>
         <th> Wypożyczalnia </th>
     </tr>
     </thead>
@@ -25,6 +26,8 @@
         <td><span th:text="${car.mark}"> Title </span></td>
         <td><span th:text="${car.model}"> Title </span></td>
         <td><span th:text="${car.color}"> Title </span></td>
+        <td th:if="${car.state}==1"><span th:text="TAK"> Title </span></td>
+        <td th:if="${car.state}==0"><span th:text="NIE"> Title </span></td>
         <td><span th:if="${car.rental!= null && car.rental.id != null}" th:text="${car.rental.city}"> Title </span></td>
         <td><a th:href="@{/editcar/{id}(id=${car.id})}" class="btn btn-primary">Edytuj</a></td>
         <td><a th:href="@{/deletecar/{id}(id=${car.id})}" class="btn btn-primary">Usuń</a></td>
@@ -52,7 +55,7 @@
                 <td><span th:text="${user.sname}"> Title </span></td>
                 <td><span th:text="${user.phone}"> Title </span></td>
                 <td><span th:text="${user.email}"> Title </span></td>
-                <td><a th:if="${user.fname}!='admin' and ${user.sname}!='admin'" th:href="@{/edituser/{id}(id=${user.id})}" class="btn btn-primary">Edytuj</a></td>
+                <td><a th:if="${user.fname}!='admin' and ${user.sname}!='admin'" th:href="@{/edituser/1/{id}(id=${user.id})}" class="btn btn-primary">Edytuj</a></td>
                 <td><a th:if="${user.fname}!='admin' and ${user.sname}!='admin'" th:href="@{/deleteuser/{id}(id=${user.id})}" class="btn btn-primary">Usuń</a></td>
             </tr>
             </tbody>
@@ -76,12 +79,12 @@
                 <td colspan="2"> No Books Available </td>
             </tr>-->
             <tr th:each="rental: ${rentals}">
-                <td><span th:text="${rental.city}"> Title </span></td>
-                <td><span th:text="${rental.address}"> Title </span></td>
-                <td><span th:text="${rental.phone}"> Title </span></td>
-                <td><span th:text="${rental.email}"> Title </span></td>
-                <td><a th:href="@{/editrental/{id}(id=${rental.id})}" class="btn btn-primary">Edytuj</a></td>
-                <td><a th:href="@{/deleterental/{id}(id=${rental.id})}" class="btn btn-primary">Usuń</a></td>
+                <td th:if="${rental.id}!=1"><span th:text="${rental.city}"> Title </span></td>
+                <td th:if="${rental.id}!=1"><span th:text="${rental.address}"> Title </span></td>
+                <td th:if="${rental.id}!=1"><span th:text="${rental.phone}"> Title </span></td>
+                <td th:if="${rental.id}!=1"><span th:text="${rental.email}"> Title </span></td>
+                <td th:if="${rental.id}!=1"><a th:href="@{/editrental/{id}(id=${rental.id})}" class="btn btn-primary">Edytuj</a></td>
+                <td th:if="${rental.id}!=1"><a th:href="@{/deleterental/{id}(id=${rental.id})}" class="btn btn-primary">Usuń</a></td>
             </tr>
             </tbody>
         </table>

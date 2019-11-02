@@ -9,7 +9,7 @@
     <h2 class="mb-5">Edytuj</h2>
     <div class="row">
         <div class="col-md-6">
-            <form action="#" th:action="@{/updateuser/{id}(id=${user.id})}" th:object="${user}" method="post">
+            <form action="#" th:action="@{/updateuser/{e}/{id}(id=${user.id},e=${panel})}" th:object="${user}" method="post">
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label for="imie" class="col-form-label">Imię</label>
@@ -27,9 +27,19 @@
                         <label for="telefon" class="col-form-label">Telefon</label>
                         <input type="text" th:field="*{phone}" class="form-control" id="telefon" placeholder="Telefon" required>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="telefon" class="col-form-label">Admin</label>
-                        <input type="text" th:field="*{phone}" class="form-control" id="telefon" placeholder="Telefon" required>
+                    <div class="form-group col-md-3" th:if="${panel}==0">
+                        <label for="haslo" class="col-form-label">Haslo</label>
+                        <input type="password" th:field="*{password}" class="form-control" id="haslo" placeholder="Haslo" required>
+                    </div>
+                    <div class="form-group col-md-3" th:if="${panel}==1">
+                        <input type="hidden" th:field="*{password}" class="form-control" id="haslo" placeholder="Haslo" th:value="${user.password}">
+                    </div>
+                    <div class="form-group col-md-3" th:if="${panel}==1">
+                        <label for="admin" class="col-form-label">Admin</label>
+                        <select class="form-control" id="admin" th:field="*{admin}">
+                            <option th:value="0">NIE</option>
+                            <option th:value="1">TAK</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">

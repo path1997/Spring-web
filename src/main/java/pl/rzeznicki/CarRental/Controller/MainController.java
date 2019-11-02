@@ -153,14 +153,15 @@ public class MainController {
         String imie=user.getFname();
         /*System.out.println(imie);*/
         String nazwisko=user.getSname();
+        String haslo=user.getPassword();
         /*System.out.println(nazwisko);*/
         List<User> uzytkownicy= (List<User>) userRepo.findAll();
         for (User uzyt : uzytkownicy ) {
             /*System.out.println(uzyt.getFname());
             System.out.println(uzyt.getSname());*/
-            if (uzyt.getFname().equals(imie) && uzyt.getSname().equals(nazwisko) && uzyt.getAdmin().equals("TAK")) {
+            if (uzyt.getFname().equals(imie) && uzyt.getSname().equals(nazwisko) && uzyt.getAdmin()==1 && uzyt.getPassword().equals(haslo)) {
                 return new RedirectView("/admin");
-            } else if (uzyt.getFname().equals(imie) && uzyt.getSname().equals(nazwisko)) {
+            } else if (uzyt.getFname().equals(imie) && uzyt.getSname().equals(nazwisko) && uzyt.getPassword().equals(haslo)) {
                 return new RedirectView("/user/"+uzyt.getId());
             }
         }
@@ -201,26 +202,57 @@ public class MainController {
     @GetMapping("/deleterental/{id}")
     public RedirectView deleteRental(@PathVariable("id") long id, Model model) {
         Rental rental = rentalRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
+        long liczba=1;
+        List<Car> samochody= (List<Car>) carRepo.findAll();
+        Rental rental1=new Rental();
+        rental1.setId(liczba);
+        for (Car sam : samochody ) {
+            System.out.println("id"+id);
+            System.out.println("samid"+sam.getRental().getId());
+            if(sam.getRental().getId()==id){
+                sam.setRental(rental1);
+                System.out.println("po zmianie"+sam.getRental().getId());
+                System.out.println(sam);
+                carRepo.save(sam);
+            }
+        }
         rentalRepo.delete(rental);
+        model.addAttribute("cars", carRepo.findAll());
         model.addAttribute("rentals", rentalRepo.findAll());
         return new RedirectView("/admin");
     }
     @GetMapping("/deleteuser/{id}")
     public RedirectView deleteUser(@PathVariable("id") long id, Model model) {
+        List<Car> samochody= (List<Car>) carRepo.findAll();
+        User uzytkownik=new User();
+        long liczba=1;
+        uzytkownik.setId(liczba);
+        for (Car sam : samochody ) {
+            if(sam.getUser().getId()==id){
+                System.out.println("1");
+                sam.setState(0);
+                sam.setUser(uzytkownik);
+                System.out.println("2");
+                carRepo.save(sam);
+                System.out.println("3");
+            }
+        }
         User user = userRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
         userRepo.delete(user);
-        model.addAttribute("users", rentalRepo.findAll());
+
+        model.addAttribute("users", userRepo.findAll());
         return new RedirectView("/admin");
     }
-    @GetMapping("/edituser/{id}")
-    public String showUpdateUser(@PathVariable("id") long id, Model model) {
+    @GetMapping("/edituser/{e}/{id}")
+    public String showUpdateUser(@PathVariable("e") int e,@PathVariable("id") long id, Model model) {
         User user = userRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
         model.addAttribute("user", user);
+        model.addAttribute("panel",e);
         return "updateuser";
     }
 
-    @PostMapping("/updateuser/{id}")
-    public RedirectView updateUser(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
+    @PostMapping("/updateuser/{e}/{id}")
+    public RedirectView updateUser(@PathVariable("e") int e,@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             user.setId(id);
             return new RedirectView("/updateuser/{id}");
@@ -228,7 +260,11 @@ public class MainController {
 
         userRepo.save(user);
         model.addAttribute("users", rentalRepo.findAll());
-        return new RedirectView("/admin");
+        if(e==1) {
+            return new RedirectView("/admin");
+        } else {
+            return new RedirectView("/user/"+id);
+        }
     }
     @GetMapping("/user/{id}")
     public String showUserPanel(@PathVariable("id") long id,Car car, Model model) {

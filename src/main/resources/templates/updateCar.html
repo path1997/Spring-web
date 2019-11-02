@@ -19,6 +19,11 @@
                         <label for="model" class="col-form-label">Email</label>
                         <input type="text" th:field="*{model}" class="form-control" id="model" placeholder="Model" required>
                     </div>
+                    <label for="wypozyczony" class="col-form-label">Wypozyczony</label>
+                    <select class="form-control" id="wypozyczony" th:field="*{state}">
+                        <option th:value="0">NIE</option>
+                        <option th:value="1">TAK</option>
+                    </select>
                     <label for="kolor" class="col-form-label">Kolor</label>
                     <select class="form-control" id="kolor" th:field="*{color}">
                         <option th:value="Czerwony">Czerwony</option>
