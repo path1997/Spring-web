@@ -47,6 +47,20 @@
                             <option th:each="rental: ${rentals}" th:value="${rental.id}" th:text="${rental.city+' '+rental.address}"></option>
                         </select>
                     </div>
+                        <div class="col-md-6">
+                            <label for="cena" class="col-form-label">Cena</label>
+                            <input type="number" th:field="*{price}" class="form-control" id="cena" placeholder="Cena" required>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="rok" class="col-form-label">Rocznik</label>
+                        <input type="number" th:field="*{year}" class="form-control" id="rok" placeholder="Rok" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="foto" class="col-form-label">Link do zdjęcia</label>
+                        <input type="text" th:field="*{photo}" class="form-control" id="foto" placeholder="Foto" required>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mt-5">

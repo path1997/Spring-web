@@ -74,7 +74,36 @@ public class Car {
     private String model;
     @Enumerated(EnumType.STRING)
     private Color color;
+    private int year;
+    private int price;
 
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public Car(User user, Rental rental, String mark, int state, String photo, String model, Color color, int year, int price) {
+        this.user = user;
+        this.rental = rental;
+        this.mark = mark;
+        this.state = state;
+        this.photo = photo;
+        this.model = model;
+        this.color = color;
+        this.year = year;
+        this.price = price;
+    }
 
     public Car(String mark, String model, Color color) {
         this.mark = mark;
