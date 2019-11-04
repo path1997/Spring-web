@@ -18,6 +18,7 @@
                     <div class="form-group col-md-6">
                         <label for="model" class="col-form-label">Email</label>
                         <input type="text" th:field="*{model}" class="form-control" id="model" placeholder="Model" required>
+                        <input type="hidden" th:field="*{user.id}" th:value="${car.user.id}">
                     </div>
                     <label for="wypozyczony" class="col-form-label">Wypozyczony</label>
                     <select class="form-control" id="wypozyczony" th:field="*{state}">

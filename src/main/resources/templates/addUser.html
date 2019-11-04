@@ -5,38 +5,39 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-<a href="/">Home</a>
-<div class="col-md-5 ml-2">
+<a href="/" class="btn btn-primary mx-1 my-1">Wróć</a>
+<div class="col-md-10 ml-2">
     <form action="#" th:action="@{/adduser}" th:object="${user}" method="post">
 
         <div class="row">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <label for="imie" class="col-form-label">Imie</label>
                 <input type="text" th:field="*{fname}" class="form-control" id="imie" placeholder="Imie" required>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <label for="nazwisko" class="col-form-label">Nazwisko</label>
                 <input type="text" th:field="*{sname}" class="form-control" id="nazwisko" placeholder="Nazwisko" required>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <label for="telefon" class="col-form-label">Numer telefonu</label>
                 <input type="text" th:field="*{phone}" class="form-control" id="telefon" placeholder="Numer telefonu" required>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <label for="email" class="col-form-label">Email</label>
-                <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email" required>
+                <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Email" required>
                 <input type="hidden" th:field="*{admin}" th:value="NIE">
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <label for="haslo" class="col-form-label">Numer telefonu</label>
                 <input type="password" th:field="*{password}" class="form-control" id="haslo" placeholder="Hasło" required>
             </div>
+        </div>
             <div class="row">
-                <div class="col-md-3 mt-5 col align-self-center">
+                <div class="col-md-3 mt-3 col align-self-center">
                     <input type="submit" class="btn btn-primary" value="Dodaj użytkownika">
                 </div>
             </div>
-        </div>
+
     </form>
 </div>
 </body>

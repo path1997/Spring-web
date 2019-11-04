@@ -5,8 +5,50 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-Witamy na stronie głównej wypożyczalni
-<a href="/logUser">Logowanie</a>
-<a href="/registerUser">Rejestracja</a>
+<div class="row">
+    <div class="col-md-12 mb-3">
+<p class="h1 text-center bold">Witamy na stronie głównej wypożyczalni</p>
+    </div>
+</div>
+<div class="row justify-content-md-center">
+    <div class="col-md-3">
+        <a class="btn btn-primary mx-2 mb-5" href="/logUser">Logowanie</a>
+        <a class="btn btn-primary mx-2 mb-5" href="/registerUser">Rejestracja</a>
+    </div>
+</div>
+        <!--<table th:each="rental: ${rentals}"th:if="${rental.id}!=1">
+            <p class="h2 text-center col-md-5" th:text="${rental.city}+' '+${rental.address}"></p>
+            <tr>
+
+                <th> Marka </th>
+                <th> Model </th>
+                <th> Kolor </th>
+                <th> Wynajmij </th>
+            </tr>
+            <tr th:each="carx: ${cars}">
+                <td th:if="${rental.id}==${carx.rental.id}"><span  th:text="${carx.mark}"> Title </span></td>
+                <td th:if="${rental.id}==${carx.rental.id}"><span  th:text="${carx.model}"> Title </span></td>
+                <td th:if="${rental.id}==${carx.rental.id}"><span  th:text="${carx.color}"> Title </span></td>
+
+            </tr>
+        </table>-->
+<p class="h1 text-center bold">Oferta naszej wypożyczalni</p>
+    <div class="container" th:each="rental: ${rentals}"th:if="${rental.id}!=1">
+        <div class="row justify-content-md-center my-4">
+            <div class="col-md-12">
+            <p class="h2 text-center" th:text="${rental.city}+' ul.'+${rental.address}"></p>
+            </div>
+        </div>
+        <div class="row my-4" th:each="carx: ${cars}" th:if="${carx.rental.id}==${rental.id}">
+            <div class="col-md-5">
+                <img th:src="${carx.photo}" th:alt="${carx.mark}+' '+${carx.model}" width="450" height="253">
+            </div>
+            <div class="col-md-7">
+                <p class="h5" th:text="'Marka: '+${carx.mark}"></p>
+                <p class="h5" th:text="'Model: '+${carx.model}"></p>
+                <p class="h5" th:text="'Kolor: '+${carx.color}"></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

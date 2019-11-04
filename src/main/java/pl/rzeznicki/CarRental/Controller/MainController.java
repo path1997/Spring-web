@@ -79,6 +79,9 @@ public class MainController {
 
     @GetMapping("/")
     public String showIndex(Model model) {
+        model.addAttribute("cars", carRepo.findAll());
+        model.addAttribute("users", userRepo.findAll());
+        model.addAttribute("rentals", rentalRepo.findAll());
         return "index";
     }
     @GetMapping("/admin")
@@ -90,6 +93,10 @@ public class MainController {
     }
     @PostMapping("/addcar")
     public RedirectView setCar(@Valid Car car, Model model){
+        long id=1;
+        User user=new User();
+        user.setId(id);
+        car.setUser(user);
         carRepo.save(car);
         model.addAttribute("cars", carRepo.findAll());
         model.addAttribute("users", userRepo.findAll());
@@ -223,11 +230,13 @@ public class MainController {
     }
     @GetMapping("/deleteuser/{id}")
     public RedirectView deleteUser(@PathVariable("id") long id, Model model) {
+        System.out.println("jestem");
         List<Car> samochody= (List<Car>) carRepo.findAll();
         User uzytkownik=new User();
         long liczba=1;
         uzytkownik.setId(liczba);
         for (Car sam : samochody ) {
+            //System.out.println(sam.getUser().getId());
             if(sam.getUser().getId()==id){
                 System.out.println("1");
                 sam.setState(0);
@@ -239,7 +248,7 @@ public class MainController {
         }
         User user = userRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
         userRepo.delete(user);
-
+        System.out.println("przeszlo");
         model.addAttribute("users", userRepo.findAll());
         return new RedirectView("/admin");
     }
