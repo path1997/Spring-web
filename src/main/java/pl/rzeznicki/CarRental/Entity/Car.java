@@ -1,7 +1,5 @@
 package pl.rzeznicki.CarRental.Entity;
 
-import pl.rzeznicki.CarRental.Color;
-
 import javax.persistence.*;
 
 @Entity
@@ -18,7 +16,7 @@ public class Car {
     @JoinColumn(name = "rental_id")
     private Rental rental;
 
-    public Car(User user, Rental rental, String mark, int state, String photo, String model, Color color) {
+    public Car(User user, Rental rental, String mark, int state, String photo, String model, String color) {
         this.user = user;
         this.rental = rental;
         this.mark = mark;
@@ -36,7 +34,7 @@ public class Car {
         this.user = user;
     }
 
-    public Car(User user, String mark, String model, Color color) {
+    public Car(User user, String mark, String model, String color) {
         this.user = user;
         this.mark = mark;
         this.model = model;
@@ -72,8 +70,7 @@ public class Car {
     private String photo;
     //@Transient
     private String model;
-    @Enumerated(EnumType.STRING)
-    private Color color;
+    private String color;
     private int year;
     private int price;
 
@@ -93,7 +90,7 @@ public class Car {
         this.price = price;
     }
 
-    public Car(User user, Rental rental, String mark, int state, String photo, String model, Color color, int year, int price) {
+    public Car(User user, Rental rental, String mark, int state, String photo, String model, String color, int year, int price) {
         this.user = user;
         this.rental = rental;
         this.mark = mark;
@@ -105,7 +102,7 @@ public class Car {
         this.price = price;
     }
 
-    public Car(String mark, String model, Color color) {
+    public Car(String mark, String model, String color) {
         this.mark = mark;
         this.model = model;
         this.color = color;
@@ -138,11 +135,11 @@ public class Car {
         this.model = model;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
     }
 

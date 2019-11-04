@@ -10,7 +10,7 @@
     <h2 class="mb-5">Edytuj</h2>
     <div class="row">
         <div class="col-md-6">
-            <form action="#" th:action="@{/updatecar/{id}(id=${car.id})}" th:object="${car}" method="post">
+            <form action="#" th:action="@{/updatecar/{id}(id=${car.id})}" th:object="${car}" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="marka" class="col-form-label">Marka</label>
@@ -31,13 +31,8 @@
                     </select>
                     </div>
                     <div class="col-md-6">
-                    <label for="kolor" class="col-form-label">Kolor</label>
-                    <select class="form-control" id="kolor" th:field="*{color}">
-                        <option th:value="Czerwony">Czerwony</option>
-                        <option th:value="Zielony">Zielony</option>
-                        <option th:value="Czarny">Czarny</option>
-                        <option th:value="Niebieski">Niebieski</option>
-                    </select>
+                        <label for="kolor" class="col-form-label">Kolor</label>
+                        <input type="text" th:field="*{color}" class="form-control" id="kolor" placeholder="Kolor" required>
                     </div>
                 </div>
                     <div class="row">
@@ -59,7 +54,8 @@
                     </div>
                     <div class="col-md-6">
                         <label for="foto" class="col-form-label">Link do zdjęcia</label>
-                        <input type="text" th:field="*{photo}" class="form-control" id="foto" placeholder="Foto" required>
+                        <input type="hidden" th:field="*{photo}" class="form-control" id="foto" placeholder="Foto">
+                        <input type="file" name="file" id="file" class="form-control-file" />
                     </div>
                 </div>
                 <div class="row">

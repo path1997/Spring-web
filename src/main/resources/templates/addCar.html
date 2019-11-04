@@ -3,12 +3,13 @@
 <head>
     <link rel="stylesheet" type="text/css"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta charset="utf-8">
 </head>
 <body>
 <a href="/admin" class="btn btn-primary mx-1 mt-1 mb-3">Wróć</a>
 <div class="row">
 <div class="col-md-6 ml-2">
-<form action="#" th:action="@{/addcar}" th:object="${car}" method="post">
+<form action="#" th:action="@{/addcar}" enctype="multipart/form-data" th:object="${car}" method="post">
 
     <div class="row">
         <div class="form-group col-md-6">
@@ -23,12 +24,7 @@
     <div class="row">
         <div class="form-group col-md-6">
             <label for="kolor" class="col-form-label">Kolor</label>
-            <select class="form-control" id="kolor" th:field="*{color}">
-                <option th:value="Czerwony">Czerwony</option>
-                <option th:value="Zielony">Zielony</option>
-                <option th:value="Czarny">Czarny</option>
-                <option th:value="Niebieski">Niebieski</option>
-            </select>
+            <input type="text" th:field="*{color}" class="form-control" id="kolor" placeholder="Kolor" required>
         </div>
         <div class="col-md-6">
             <label for="wypozyczalnia" class="col-form-label">Wypożyczalnia</label>
@@ -49,8 +45,9 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <label for="link" class="col-form-label">Link do zdjęcia</label>
-            <input type="text" th:field="*{photo}" class="form-control" id="link" placeholder="Link" required>
+            <label for="file" class="col-form-label">Zdjęcie</label>
+            <!--<input type="text" th:field="*{photo}" class="form-control" id="link" placeholder="Link" required>-->
+            <input type="file" name="file" id="file" class="form-control-file" />
         </div>
     </div>
 

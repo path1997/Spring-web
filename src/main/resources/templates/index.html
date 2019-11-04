@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta charset="utf-8">
 </head>
 <body>
 <div class="row">
@@ -41,12 +42,14 @@
         </div>
         <div class="row my-4" th:each="carx: ${cars}" th:if="${carx.rental.id}==${rental.id}">
             <div class="col-md-5">
-                <img th:src="${carx.photo}" th:alt="${carx.mark}+' '+${carx.model}" width="450" height="253">
+                <img th:src="@{${carx.photo}}" th:alt="${carx.mark}+' '+${carx.model}" width="450" height="253"/>
             </div>
             <div class="col-md-7">
                 <p class="h5" th:text="'Marka: '+${carx.mark}"></p>
                 <p class="h5" th:text="'Model: '+${carx.model}"></p>
                 <p class="h5" th:text="'Kolor: '+${carx.color}"></p>
+                <p class="h5" th:text="'Rocznik: '+${carx.year}"></p>
+                <p class="h5" th:text="'Cena: '+${carx.price}+'zł'"></p>
             </div>
         </div>
     </div>
