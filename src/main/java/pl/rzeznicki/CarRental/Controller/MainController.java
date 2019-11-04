@@ -151,7 +151,14 @@ public class MainController {
     }
     @GetMapping("/logUser")
     public String loginUser(User car, Model model) {
-
+        String dane="";
+        model.addAttribute("komunikat",dane);
+        return "login";
+    }
+    @GetMapping("/logUser/1")
+    public String loginUserFail(User car, Model model) {
+        String dane="Nieprawidlowe dane";
+        model.addAttribute("komunikat",dane);
         return "login";
     }
     @PostMapping("/loginuser")
@@ -173,7 +180,7 @@ public class MainController {
             }
         }
         System.out.println("nie zalogowano");
-        return new RedirectView("/logUser");
+        return new RedirectView("/logUser/1");
     }
     @GetMapping("/registerRental")
     public String showRegisterRentalForm(Rental rental) {

@@ -11,30 +11,36 @@
         <div class="col-md-6">
             <form action="#" th:action="@{/updateuser/{e}/{id}(id=${user.id},e=${panel})}" th:object="${user}" method="post">
                 <div class="row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-6">
                         <label for="imie" class="col-form-label">Imię</label>
                         <input type="text" th:field="*{fname}" class="form-control" id="imie" placeholder="Imie" required>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="nazwisko" class="col-form-label">Adres</label>
+                    <div class="form-group col-md-6">
+                        <label for="nazwisko" class="col-form-label">Nazwisko</label>
                         <input type="text" th:field="*{sname}" class="form-control" id="nazwisko" placeholder="Nazwisko" required>
                     </div>
-                    <div class="form-group col-md-3">
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
                         <label for="email" class="col-form-label">Email</label>
                         <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Email" required>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-6">
                         <label for="telefon" class="col-form-label">Telefon</label>
-                        <input type="text" th:field="*{phone}" class="form-control" id="telefon" placeholder="Telefon" required>
+                        <input type="number" th:field="*{phone}" class="form-control" id="telefon" placeholder="Telefon" required>
                     </div>
-                    <div class="form-group col-md-3" th:if="${panel}==0">
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6" th:if="${panel}==0">
                         <label for="haslo" class="col-form-label">Haslo</label>
                         <input type="password" th:field="*{password}" class="form-control" id="haslo" placeholder="Haslo" required>
                     </div>
-                    <div class="form-group col-md-3" th:if="${panel}==1">
+                    <div class="form-group col-md-6" th:if="${panel}==1">
                         <input type="hidden" th:field="*{password}" class="form-control" id="haslo" placeholder="Haslo" th:value="${user.password}">
                     </div>
-                    <div class="form-group col-md-3" th:if="${panel}==1">
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6" th:if="${panel}==1">
                         <label for="admin" class="col-form-label">Admin</label>
                         <select class="form-control" id="admin" th:field="*{admin}">
                             <option th:value="0">NIE</option>

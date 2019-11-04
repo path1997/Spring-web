@@ -5,27 +5,30 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+<a href="/admin" class="btn btn-primary mx-1 mt-1 mb-3">Wróć</a>
 <div class="container my-5">
     <h2 class="mb-5">Edytuj</h2>
     <div class="row">
         <div class="col-md-6">
             <form action="#" th:action="@{/updaterental/{id}(id=${rental.id})}" th:object="${rental}" method="post">
                 <div class="row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-6">
                         <label for="miasto" class="col-form-label">Miasto</label>
                         <input type="text" th:field="*{city}" class="form-control" id="miasto" placeholder="Miasto" required>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-6">
                         <label for="adres" class="col-form-label">Adres</label>
                         <input type="text" th:field="*{address}" class="form-control" id="adres" placeholder="Adres" required>
                     </div>
-                    <div class="form-group col-md-3">
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
                         <label for="email" class="col-form-label">Email</label>
-                        <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email" required>
+                        <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Email" required>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-6">
                         <label for="telefon" class="col-form-label">Telefon</label>
-                        <input type="text" th:field="*{phone}" class="form-control" id="telefon" placeholder="Telefon" required>
+                        <input type="number" th:field="*{phone}" class="form-control" id="telefon" placeholder="Telefon" required>
                     </div>
                 </div>
                 <div class="row">

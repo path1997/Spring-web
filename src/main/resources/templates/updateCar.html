@@ -5,6 +5,7 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+<a href="/admin" class="btn btn-primary mx-1 mt-1 mb-3">Wróć</a>
 <div class="container my-5">
     <h2 class="mb-5">Edytuj</h2>
     <div class="row">
@@ -20,11 +21,16 @@
                         <input type="text" th:field="*{model}" class="form-control" id="model" placeholder="Model" required>
                         <input type="hidden" th:field="*{user.id}" th:value="${car.user.id}">
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                     <label for="wypozyczony" class="col-form-label">Wypozyczony</label>
                     <select class="form-control" id="wypozyczony" th:field="*{state}">
                         <option th:value="0">NIE</option>
                         <option th:value="1">TAK</option>
                     </select>
+                    </div>
+                    <div class="col-md-6">
                     <label for="kolor" class="col-form-label">Kolor</label>
                     <select class="form-control" id="kolor" th:field="*{color}">
                         <option th:value="Czerwony">Czerwony</option>
@@ -32,7 +38,10 @@
                         <option th:value="Czarny">Czarny</option>
                         <option th:value="Niebieski">Niebieski</option>
                     </select>
-                    <div class="col-md-3">
+                    </div>
+                </div>
+                    <div class="row">
+                    <div class="col-md-6">
                         <label for="wypozyczalnia" class="col-form-label">Wypożyczalnia</label>
                         <select class="form-control" id="wypozyczalnia" th:field="*{rental.id}">
                             <option th:each="rental: ${rentals}" th:value="${rental.id}" th:text="${rental.city+' '+rental.address}"></option>

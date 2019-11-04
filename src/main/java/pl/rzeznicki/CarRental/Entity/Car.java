@@ -75,6 +75,7 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private Color color;
 
+
     public Car(String mark, String model, Color color) {
         this.mark = mark;
         this.model = model;

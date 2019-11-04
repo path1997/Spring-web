@@ -6,6 +6,7 @@
 </head>
 <body>
 <a href="/" class="btn btn-primary mx-1 mt-1 mb-3">Wróć</a>
+<p class="h4" th:text="${komunikat}"></p>
 <div class="col-md-5 ml-2">
     <form action="#" th:action="@{/loginuser}" th:object="${user}" method="post">
         <div class="row">
