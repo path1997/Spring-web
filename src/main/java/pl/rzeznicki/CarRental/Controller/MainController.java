@@ -103,19 +103,20 @@ public class MainController {
         }
         if (file.isEmpty()) {
 
-        }
-        try {
-            File file1=new File(uploadDirectory+car.getPhoto());
-            file1.delete();
-            // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(uploadDirectory + file.getOriginalFilename());
-            Files.write(path, bytes);
-            car.setPhoto(file.getOriginalFilename());
+        } else {
+            try {
+                File file1 = new File(uploadDirectory + car.getPhoto());
+                file1.delete();
+                // Get the file and save it somewhere
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get(uploadDirectory + file.getOriginalFilename());
+                Files.write(path, bytes);
+                car.setPhoto(file.getOriginalFilename());
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         carRepo.save(car);

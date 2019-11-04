@@ -13,13 +13,14 @@
     <a class="btn btn-primary my-2 mx-2" th:href="@{/edituser/0/{id}(id=${user.id})}">Edytuj konto</a>
     <a class="btn btn-primary my-2 mx-2" href="/">Wyloguj</a>
     </div>
-<p class="h2 text-center font-weight-bold">Wypożyczone auta przez ciebie</p>
+<p class="h1 text-center font-weight-bold">Wypożyczone auta przez ciebie</p>
 <div class="row justify-content-md-center px-3 py-2">
     <table class="table table-striped table-dark col-md-10">
         <tr>
             <th> Marka </th>
             <th> Model </th>
             <th> Kolor </th>
+            <th> Rocznik </th>
             <th> Oddaje w punkcie </th>
             <th> Oddaj </th>
         </tr>
@@ -27,6 +28,7 @@
             <td th:if="${carx.state}==1 and ${user.id}==${carx.user.id}"><span  th:text="${carx.mark}"> Title </span></td>
             <td th:if="${carx.state}==1 and ${user.id}==${carx.user.id}"><span  th:text="${carx.model}"> Title </span></td>
             <td th:if="${carx.state}==1 and ${user.id}==${carx.user.id}"><span  th:text="${carx.color}"> Title </span></td>
+            <td th:if="${carx.state}==1 and ${user.id}==${carx.user.id}"><span  th:text="${carx.year}"> Title </span></td>
             <form action="#" th:action="@{/returncar/{id}/{idC}(id=${user.id},idC=${carx.id})}" th:object="${car}" method="post">
                 <td th:if="${carx.state}==1 and ${user.id}==${carx.user.id}">
                     <select class="form-control" id="wypozyczalnia" th:field="*{rental.id}">
@@ -37,7 +39,7 @@
         </tr>
     </table>
 </div>
-    <p class="h2 text-center font-weight-bold">Wypożycz auto</p>
+    <p class="h1 text-center font-weight-bold">Wypożycz auto</p>
     <div class="row justify-content-md-center px-3 py-2">
     <table th:each="rental: ${rentals}" class="table table-striped table-dark col-md-10" th:if="${rental.id}!=1">
         <tr>
@@ -45,12 +47,14 @@
             <th> Marka </th>
             <th> Model </th>
             <th> Kolor </th>
+            <th> Rocznik </th>
             <th> Wynajmij </th>
         </tr>
         <tr th:each="carx: ${cars}">
             <td th:if="${rental.id}==${carx.rental.id} and ${carx.state}==0"><span  th:text="${carx.mark}"> Title </span></td>
             <td th:if="${rental.id}==${carx.rental.id} and ${carx.state}==0"><span  th:text="${carx.model}"> Title </span></td>
             <td th:if="${rental.id}==${carx.rental.id} and ${carx.state}==0"><span  th:text="${carx.color}"> Title </span></td>
+            <td th:if="${rental.id}==${carx.rental.id} and ${carx.state}==0"><span  th:text="${carx.year}"> Title </span></td>
             <td th:if="${rental.id}==${carx.rental.id} and ${carx.state}==0"><a th:href="@{/getcar/{id}/{idC}(id=${user.id},idC=${carx.id})}" class="btn btn-primary">Wynajmij</a></td>
 
         </tr>
