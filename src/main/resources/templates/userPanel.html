@@ -88,7 +88,7 @@
             <div class="row my-4" th:each="carx: ${cars}" th:if="${carx.rental.id}==${rental.id} and ${carx.state}==0">
                 <div class="col-md-5">
                     <!--<img th:src="@{${photox.sciezka}}" th:alt="${carx.mark}+' '+${carx.model}" width="450" height="253"/>-->
-                    <div th:id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div th:id="'carouselExampleControls'+${carx.id}" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div th:each="photo: ${photos}" th:if="${carx.id}==${photo.car.id} and ${photo.pozycja}==1" class="carousel-item active">
                                 <img class="d-block w-100" width="450" height="253" th:src="@{'../'+${photo.sciezka}}" alt="First slide">
@@ -100,11 +100,11 @@
                                 <img class="d-block w-100" width="450" height="253" th:src="@{'../'+${photo.sciezka}}" alt="Third slide">
                             </div>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <a class="carousel-control-prev" th:href="'#carouselExampleControls'+${carx.id}" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <a class="carousel-control-next" th:href="'#carouselExampleControls'+${carx.id}" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>
@@ -142,7 +142,7 @@
                                 div += "<div class='row my-4'>";
                                 div += "<div class='col-md-5'>";
                                 /*div+="<img src="+e[i].photo[0].sciezka+" width='450' height='253'/>";*/
-                                div += "<div id='carouselExampleControls' class='carousel slide' data-ride='carousel'>";
+                                div += "<div id='carouselExampleControls"+e[i].id+"' class='carousel slide' data-ride='carousel'>";
                                 div += "<div class='carousel-inner'>";
                                 div += "<div class='carousel-item active'>";
                                 div += "<img class='d-block w-100' width='450' height='253' src=../" + e[i].photo[0].sciezka + ">";
@@ -158,11 +158,11 @@
                                     div += "</div>";
                                 }
                                 div += "</div>";
-                                div += "<a class='carousel-control-prev' href='#carouselExampleControls' role='button' data-slide='prev'>";
+                                div += "<a class='carousel-control-prev' href='#carouselExampleControls"+e[i].id+"' role='button' data-slide='prev'>";
                                 div += "<span class='carousel-control-prev-icon' aria-hidden='true'></span>";
                                 div += "<span class='sr-only'>Previous</span>";
                                 div += "</a>";
-                                div += "<a class='carousel-control-next' href='#carouselExampleControls' role='button' data-slide='next'>";
+                                div += "<a class='carousel-control-next' href='#carouselExampleControls"+e[i].id+"' role='button' data-slide='next'>";
                                 div += "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
                                 div += "<span class='sr-only'>Next</span>";
                                 div += "</a>";
