@@ -37,17 +37,6 @@ public class Rental {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Rental{" +
-                "id=" + id +
-                ", car=" + car +
-                ", city='" + city + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 
     public Long getId() {
         return id;
@@ -96,4 +85,5 @@ public class Rental {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

@@ -1,6 +1,9 @@
 package pl.rzeznicki.CarRental.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "car")
@@ -8,23 +11,53 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "rental_id")
     private Rental rental;
 
-    public Car(User user, Rental rental, String mark, int state, String photo, String model, String color) {
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
+    @OneToMany(mappedBy = "car")
+    private List<Orders> orders;
+
+    public Car(User user, Rental rental, List<Orders> orders, List<Photo> photo, String mark, int state, String model, String color, int year, int price) {
         this.user = user;
         this.rental = rental;
+        this.orders = orders;
+        this.photo = photo;
         this.mark = mark;
         this.state = state;
-        this.photo = photo;
         this.model = model;
         this.color = color;
+        this.year = year;
+        this.price = price;
     }
+
+    public List<Photo> getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(List<Photo> photo) {
+        this.photo = photo;
+    }
+
+    @OneToMany(mappedBy = "car")
+    private List<Photo> photo;
 
     public User getUser() {
         return user;
@@ -34,12 +67,6 @@ public class Car {
         this.user = user;
     }
 
-    public Car(User user, String mark, String model, String color) {
-        this.user = user;
-        this.mark = mark;
-        this.model = model;
-        this.color = color;
-    }
 
     public Rental getRental() {
         return rental;
@@ -57,17 +84,9 @@ public class Car {
         this.state = state;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
 
     private String mark;
     private int state;
-    private String photo;
     //@Transient
     private String model;
     private String color;
@@ -90,22 +109,15 @@ public class Car {
         this.price = price;
     }
 
-    public Car(User user, Rental rental, String mark, int state, String photo, String model, String color, int year, int price) {
+    public Car(User user, Rental rental, String mark, int state, String model, String color, int year, int price) {
         this.user = user;
         this.rental = rental;
         this.mark = mark;
         this.state = state;
-        this.photo = photo;
         this.model = model;
         this.color = color;
         this.year = year;
         this.price = price;
-    }
-
-    public Car(String mark, String model, String color) {
-        this.mark = mark;
-        this.model = model;
-        this.color = color;
     }
 
     public Car() {
@@ -143,13 +155,4 @@ public class Car {
         this.color = color;
     }
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", mark='" + mark + '\'' +
-                ", model='" + model + '\'' +
-                ", color=" + color +
-                '}';
-    }
 }

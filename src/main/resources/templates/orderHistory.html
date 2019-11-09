@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<a th:href="'/user/'+${id}" class="btn btn-primary mx-1 mt-1 mb-3">Wróć</a>
+<p class="h1 text-center font-weight-bold">Historia zamowien</p>
+<div class="row justify-content-md-center px-3 py-2">
+    <table class="table table-striped table-dark col-md-10">
+        <tr>
+            <th> Marka </th>
+            <th> Model </th>
+            <th> Kolor </th>
+            <th> Rocznik </th>
+            <th> Data wypozyczenia </th>
+            <th> Data oddania </th>
+        </tr>
+        <tr th:each="order: ${orders}">
+            <td th:if="${order.data_oddania}!=null"><span  th:text="${order.car.mark}"> Title </span></td>
+            <td th:if="${order.data_oddania}!=null"><span  th:text="${order.car.model}"> Title </span></td>
+            <td th:if="${order.data_oddania}!=null"><span  th:text="${order.car.color}"> Title </span></td>
+            <td th:if="${order.data_oddania}!=null"><span  th:text="${order.car.year}"> Title </span></td>
+            <td th:if="${order.data_oddania}!=null"><span  th:text="${#dates.format(order.data_wypozyczenia, 'dd-MM-yyyy HH:mm')}"> Title </span></td>
+            <td th:if="${order.data_oddania}!=null"><span  th:text="${#dates.format(order.data_oddania, 'dd-MM-yyyy HH:mm')}"> Title </span></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

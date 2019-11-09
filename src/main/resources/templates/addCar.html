@@ -7,6 +7,8 @@
 </head>
 <body>
 <a href="/admin" class="btn btn-primary mx-1 mt-1 mb-3">Wróć</a>
+<div class="container my-5">
+    <h2 class="mb-5">Dodaj pojazd</h2>
 <div class="row">
 <div class="col-md-6 ml-2">
 <form action="#" th:action="@{/addcar}" enctype="multipart/form-data" th:object="${car}" method="post">
@@ -44,19 +46,30 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <label for="file" class="col-form-label">Zdjęcie</label>
+        <div class="col-md-4">
+            <label for="file1" class="col-form-label">Zdjęcie 1</label>
             <!--<input type="text" th:field="*{photo}" class="form-control" id="link" placeholder="Link" required>-->
-            <input type="file" name="file" id="file" class="form-control-file" required />
+            <input type="file" name="file1" id="file1" class="form-control-file" required />
+        </div>
+        <div class="col-md-4">
+            <label for="file2" class="col-form-label">Zdjęcie 2</label>
+            <!--<input type="text" th:field="*{photo}" class="form-control" id="link" placeholder="Link" required>-->
+            <input type="file" name="file2" id="file2" class="form-control-file"/>
+        </div>
+        <div class="col-md-4">
+            <label for="file3" class="col-form-label">Zdjęcie 3</label>
+            <!--<input type="text" th:field="*{photo}" class="form-control" id="link" placeholder="Link" required>-->
+            <input type="file" name="file3" id="file3" class="form-control-file"/>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-3 mt-5 col align-self-center">
-            <input type="submit" class="btn btn-primary" value="Dodaj samochód">
+            <input type="submit" class="btn btn-primary" value="Dodaj pojazd">
         </div>
     </div>
 </form>
+</div>
 </div>
 </div>
 </body>

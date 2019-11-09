@@ -13,7 +13,19 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Car> car;
 
+    @OneToMany(mappedBy = "user")
+    private List<Orders> orders;
+
     private String fname;
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
     //@Transient
     private String sname;
     private String phone;
@@ -39,19 +51,6 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", car=" + car +
-                ", fname='" + fname + '\'' +
-                ", sname='" + sname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", admin='" + admin + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 
     public List<Car> getCar() {
         return car;
@@ -127,5 +126,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
 }

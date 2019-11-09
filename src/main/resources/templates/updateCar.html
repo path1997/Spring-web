@@ -7,7 +7,7 @@
 <body>
 <a href="/admin" class="btn btn-primary mx-1 mt-1 mb-3">Wróć</a>
 <div class="container my-5">
-    <h2 class="mb-5">Edytuj</h2>
+    <h2 class="mb-5">Edytuj pojazd</h2>
     <div class="row">
         <div class="col-md-6">
             <form action="#" th:action="@{/updatecar/{id}(id=${car.id})}" th:object="${car}" method="post" enctype="multipart/form-data">
@@ -52,10 +52,12 @@
                         <label for="rok" class="col-form-label">Rocznik</label>
                         <input type="number" th:field="*{year}" class="form-control" id="rok" placeholder="Rok" required>
                     </div>
-                    <div class="col-md-6">
-                        <label for="foto" class="col-form-label">Zdjęcie</label>
-                        <input type="hidden" th:field="*{photo}" class="form-control" id="foto" placeholder="Foto">
-                        <input type="file" name="file" id="file" class="form-control-file" />
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mt-3" th:each="photo: ${photos}" th:if="${photo.car.id}==${car.id}">
+                        <label><input type="checkbox" th:name="'usun'+${photo.pozycja}"> Usuń</label>
+                        <img th:src="@{'../'+${photo.sciezka}}" th:alt="${car.mark}+' '+${car.model}" width="160" height="90"/>
+                        <input type="file" th:name="'file'+${photo.pozycja}" th:id="'file'+${photo.pozycja}" class="form-control-file" />
                     </div>
                 </div>
                 <div class="row">

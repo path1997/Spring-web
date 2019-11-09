@@ -4,8 +4,16 @@
     <link rel="stylesheet" type="text/css"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <meta charset="utf-8">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
+
 <div class="row">
     <div class="col-md-12 mb-3">
 <p class="h1 text-center bold">Witamy na stronie głównej wypożyczalni</p>
@@ -35,7 +43,17 @@
             </tr>
         </table>-->
 <p class="h1 text-center bold">Oferta naszej wypożyczalni</p>
-    <div class="container" th:each="rental: ${rentals}"th:if="${rental.id}!=1">
+<div class="row justify-content-md-center">
+    <div class="col-md-5">
+        <select class="form-control" id="mySelect" >
+            <option id="0" selected>Wszystkie wypożyczalnie</option>
+            <option th:each="rental: ${rentals}" th:if="${rental.id}!=1" th:id="${rental.id}" th:text="${rental.city+' '+rental.address}"></option>
+        </select>
+    </div>
+</div>
+<div class="container" id="auta"></div>
+<div id="wszystko">
+    <div class="container"  th:each="rental: ${rentals}"th:if="${rental.id}!=1">
         <div class="row justify-content-md-center my-4">
             <div class="col-md-12">
             <p class="h2 text-center" th:text="${rental.city}+' ul.'+${rental.address}"></p>
@@ -43,7 +61,28 @@
         </div>
         <div class="row my-4" th:each="carx: ${cars}" th:if="${carx.rental.id}==${rental.id}">
             <div class="col-md-5">
-                <img th:src="@{${carx.photo}}" th:alt="${carx.mark}+' '+${carx.model}" width="450" height="253"/>
+                <!--<img th:src="@{${photox.sciezka}}" th:alt="${carx.mark}+' '+${carx.model}" width="450" height="253"/>-->
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div th:each="photo: ${photos}" th:if="${carx.id}==${photo.car.id} and ${photo.pozycja}==1" class="carousel-item active">
+                            <img class="d-block w-100" width="450" height="253" th:src="@{${photo.sciezka}}" alt="First slide">
+                        </div>
+                        <div th:each="photo: ${photos}" th:if="${carx.id}==${photo.car.id} and ${photo.pozycja}==2" class="carousel-item">
+                            <img class="d-block w-100" width="450" height="253" th:src="@{${photo.sciezka}}" alt="Second slide">
+                        </div>
+                        <div th:each="photo: ${photos}" th:if="${carx.id}==${photo.car.id} and ${photo.pozycja}==3" class="carousel-item">
+                            <img class="d-block w-100" width="450" height="253" th:src="@{${photo.sciezka}}" alt="Third slide">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
             </div>
             <div class="col-md-7">
                 <p class="h5" th:text="'Marka: '+${carx.mark}"></p>
@@ -51,8 +90,77 @@
                 <p class="h5" th:text="'Kolor: '+${carx.color}"></p>
                 <p class="h5" th:text="'Rocznik: '+${carx.year}"></p>
                 <p class="h5" th:text="'Cena za dzień: '+${carx.price}+'zł'"></p>
+                <p class="h5" th:if="${carx.state}==0" th:text="Dostepny"></p>
+                <p class="h5" th:if="${carx.state}==1" th:text="Niedostepny"></p>
             </div>
         </div>
     </div>
+</div>
+
+<script>
+    $( document ).ready(function() {
+        var mySelect = $('#mySelect');
+        mySelect.on('change',function(){
+            var id = $(this).children(":selected").attr("id");
+            $.get('/cos/'+id,function(e){
+                console.log(e);
+                    if(e.length==0){
+                        $("#auta").empty();
+                        document.getElementById("wszystko").style.display ="block";
+                    } else{
+                    var div="";
+                for(var i =0; i<e.length; i++) {
+                    div += "<div class='row my-4'>";
+                    div+= "<div class='col-md-5'>";
+                    /*div+="<img src="+e[i].photo[0].sciezka+" width='450' height='253'/>";*/
+                     div+="<div id='carouselExampleControls' class='carousel slide' data-ride='carousel'>";
+                     div+="<div class='carousel-inner'>";
+                     div+="<div class='carousel-item active'>";
+                     div+="<img class='d-block w-100' width='450' height='253' src="+e[i].photo[0].sciezka+">";
+                     div+="</div>";
+                     if(e[i].photo.length>=2){
+                     div+="<div class='carousel-item'>";
+                      div+="<img class='d-block w-100' width='450' height='253' src="+e[i].photo[1].sciezka+">";
+                      div+="</div>";
+                      }
+                     if(e[i].photo.length==3){
+                        div+="<div class='carousel-item'>";
+                        div+="<img class='d-block w-100' width='450' height='253' src="+e[i].photo[2].sciezka+">";
+                        div+="</div>";
+                     }
+                    div+="</div>";
+                    div+="<a class='carousel-control-prev' href='#carouselExampleControls' role='button' data-slide='prev'>";
+                    div+="<span class='carousel-control-prev-icon' aria-hidden='true'></span>";
+                    div+="<span class='sr-only'>Previous</span>";
+                    div+="</a>";
+                    div+="<a class='carousel-control-next' href='#carouselExampleControls' role='button' data-slide='next'>";
+                    div+="<span class='carousel-control-next-icon' aria-hidden='true'></span>";
+                    div+="<span class='sr-only'>Next</span>";
+                    div+="</a>";
+                    div+="</div>";
+                    div+= "</div>";
+                    div+="<div class='col-md-7'>";
+                    div+="<p class='h5'>Marka: "+e[i].mark+"</p>";
+                    div+="<p class='h5'>Model: "+e[i].model+"</p>";
+                    div+="<p class='h5'>Kolor: "+e[i].color+"</p>";
+                    div+="<p class='h5'>Rocznik: "+e[i].year+"</p>";
+                    div+="<p class='h5'>Cena za dobę: "+e[i].price+"</p>";
+                    if(e[i].state==0){
+                        div+="<p class='h5'>Dostępny"+"</p>";
+                    } else {
+                        div+="<p class='h5'>Niedostępny"+"</p>";
+                    }
+                    div+="</div>";
+                    div+="</div>";
+                }
+                        document.getElementById("wszystko").style.display ="none";
+                $("#auta").empty();
+                $("#auta").append(div);
+                    }
+            });
+        });
+    });
+</script>
+ <!--   </div>-->
 </body>
 </html>

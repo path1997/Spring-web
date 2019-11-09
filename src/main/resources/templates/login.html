@@ -6,19 +6,24 @@
 </head>
 <body>
 <a href="/" class="btn btn-primary mx-1 mt-1 mb-3">Wróć</a>
-<p class="h4" th:text="${komunikat}"></p>
+<div class="container my-5">
+    <h2 class="mb-5">Logowanie</h2>
+    <p class="h4" th:text="${komunikat}"></p>
+    <div class="row">
 <div class="col-md-5 ml-2">
     <form action="#" th:action="@{/loginuser}" th:object="${user}" method="post">
         <div class="row">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-6">
                 <label for="imie" class="col-form-label">Imie</label>
                 <input type="text" th:field="*{fname}" class="form-control" id="imie" placeholder="Imie">
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-6">
                 <label for="nazwisko" class="col-form-label">Nazwisko</label>
                 <input type="text" th:field="*{sname}" class="form-control" id="nazwisko" placeholder="Nazwisko">
             </div>
-            <div class="form-group col-md-3">
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
                 <label for="haslo" class="col-form-label">Hasło</label>
                 <input type="password" th:field="*{password}" class="form-control" id="haslo" placeholder="Hasło">
             </div>
@@ -29,6 +34,8 @@
             </div>
         </div>
     </form>
+</div>
+    </div>
 </div>
 </body>
 </html>
