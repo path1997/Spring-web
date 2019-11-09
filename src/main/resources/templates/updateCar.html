@@ -54,10 +54,26 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 mt-3" th:each="photo: ${photos}" th:if="${photo.car.id}==${car.id}">
+                    <div class="col-md-4 mt-3">
+                        <div th:each="photo: ${photos}" th:if="${photo.car.id}==${car.id} and ${photo.pozycja}==1">
                         <label><input type="checkbox" th:name="'usun'+${photo.pozycja}"> Usuń</label>
                         <img th:src="@{'../'+${photo.sciezka}}" th:alt="${car.mark}+' '+${car.model}" width="160" height="90"/>
-                        <input type="file" th:name="'file'+${photo.pozycja}" th:id="'file'+${photo.pozycja}" class="form-control-file" />
+                        </div>
+                        <input type="file" name="file1" id="file1" class="form-control-file" />
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <div th:each="photo: ${photos}" th:if="${photo.car.id}==${car.id} and ${photo.pozycja}==2">
+                            <label><input type="checkbox" th:name="'usun'+${photo.pozycja}"> Usuń</label>
+                            <img th:src="@{'../'+${photo.sciezka}}" th:alt="${car.mark}+' '+${car.model}" width="160" height="90"/>
+                        </div>
+                        <input type="file" name="file2" id="file2" class="form-control-file" />
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <div th:each="photo: ${photos}" th:if="${photo.car.id}==${car.id} and ${photo.pozycja}==3">
+                            <label><input type="checkbox" th:name="'usun'+${photo.pozycja}"> Usuń</label>
+                            <img th:src="@{'../'+${photo.sciezka}}" th:alt="${car.mark}+' '+${car.model}" width="160" height="90"/>
+                        </div>
+                        <input type="file" name="file3" id="file3" class="form-control-file" />
                     </div>
                 </div>
                 <div class="row">
