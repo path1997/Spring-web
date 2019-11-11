@@ -269,11 +269,15 @@ public class MainController {
         Car car = carRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Nieprawidłowe Id:" + id));
         //File file1=new File(uploadDirectory+car.getPhoto());
         //file1.delete();
+        List<Orders> zamowienia=car.getOrders();
         List<Photo> fotki=car.getPhoto();
         for(Photo fot:fotki){
             File file1=new File(uploadDirectory+fot.getSciezka());
             file1.delete();
             photoRepo.delete(fot);
+        }
+        for(Orders zam:zamowienia){
+            ordersRepo.delete(zam);
         }
         carRepo.delete(car);
         model.addAttribute("cars", carRepo.findAll());
